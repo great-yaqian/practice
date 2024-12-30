@@ -7,20 +7,18 @@ void findMaxABC(int N) {
     int maxA = 0, maxB = 0, maxC = 0;
     bool found = false;
     for (int C = 0; C <= N; ++C) {
-        if ((N - C) % 7 == 0) {   //why  
-            int AB = N - C;
-            for (int B = 0; B <= AB; ++B) {
-                int A = AB - B;
-                if ((A + B) % 3 == 0 && (B + C) % 5 == 0){
-                    maxA = A;
-                    maxB = B;
-                    maxC = C;
-                    found = true;
-                    break;
-                }
+        int AB = N - C;
+        for (int B = 0; B <= AB; ++B) {
+            int A = AB - B;
+            if ((A + B) % 3 == 0 && (B + C) % 5 == 0){
+                maxA = A;
+                maxB = B;
+                maxC = C;
+                found = true;
+                break;
             }
-            if (found) break;
         }
+        if (found) break;
     }
     if (found) 
         cout << "A: " << maxA << ", B: " << maxB << ", C: " << maxC << endl; 
@@ -41,4 +39,6 @@ int main() {
 
     return 0;
 }
+
+
 
