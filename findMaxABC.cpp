@@ -3,40 +3,31 @@
 
 using namespace std;
 
-void findMaxABC(int N) {
-    int maxA = 0, maxB = 0, maxC = 0;
+void findMaxABC(int N){
+    int A, B, C;
     bool found = false;
-    for (int C = 0; C <= N; ++C) {
+    for( C=0; C<=N; C++){
         int AB = N - C;
-        for (int B = 0; B <= AB; ++B) {
-            int A = AB - B;
-            if ((A + B) % 3 == 0 && (B + C) % 5 == 0){
-                maxA = A;
-                maxB = B;
-                maxC = C;
-                found = true;
+        if( AB % 3 == 0){
+            for( B=0; B<=AB; B++)
+                if( (B+C) %5 == 0 ){
+                    A = AB - B;
+                    found = true;
+                    break;
+                    }
+            if ( found )
                 break;
             }
         }
-        if (found) break;
+    if( found )
+        cout << A << " " << B << " " << C << endl;
     }
-    if (found) 
-        cout << "A: " << maxA << ", B: " << maxB << ", C: " << maxC << endl; 
-    else 
-        cout << "No solution found." << endl;
-}
-
+            
 int main() {
     int N;
-    cout << "Enter the value of N: ";
     cin >> N;
-
-    if (N % 7 == 0) {
+    if ( N % 7 == 0)
         findMaxABC(N);
-    } else {
-        cout << "N must be a multiple of 7." << endl;
-    }
-
     return 0;
 }
 
