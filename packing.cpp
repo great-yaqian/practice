@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <iostream>
 
 using namespace std;
 // packing problem:
@@ -21,6 +22,7 @@ void BackTrack (int i) {
             for (int j=1; j<=n; j++)
                 bestx[j] = x[j];
             bestw = cw;
+            cout << "i=" << i << ' ' <<  "bestw=" << bestw << endl;
             }
         return;
         }
@@ -28,14 +30,16 @@ void BackTrack (int i) {
     if (cw+w[i] <= c1) {  //if i can be put in c1, then put it
         x[i] = 1;
         cw += w[i];
+        cout << "cw=" << cw << endl;
         BackTrack(i+1); // recursive next one 
         cw -= w[i];
         }//if
-    if (cw+r > bestw) { // 
+    if (cw+r > bestw) { // i can't put in c1, next one
         x[i] = 0;
         BackTrack(i+1);
         }
-    r += w[i];
+    r += w[i]; // backtrack!!
+    cout << "r=" << r << endl;
     }//BackTrack
 
 int main() {
@@ -48,7 +52,7 @@ int main() {
             r += w[i];   // r is total weight
             }
         BackTrack(1);   // begin at first one
-        if (r-bestw <= c2)  // remained box can be put 
+        if (r-bestw <= c2)  // remained box can be put in c2
             printf("Yes");
         else
             printf("No");
